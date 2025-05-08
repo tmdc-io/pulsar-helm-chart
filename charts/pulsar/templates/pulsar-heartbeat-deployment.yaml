@@ -105,7 +105,7 @@ spec:
           - name: BrokerProxyURL
             value: "http://{{ template "pulsar.fullname" . }}-{{ .Values.broker.component }}:8080"
           - name: PulsarURL
-            value: "pulsar://{{ template "pulsar.fullname" . }}-{{ .Values.broker.component }}:6651"
+            value: "pulsar://{{ template "pulsar.fullname" . }}-{{ .Values.broker.component }}:6650"
       {{- with .Values.pulsar_heartbeat.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
