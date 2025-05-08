@@ -214,13 +214,11 @@ spec:
           cat conf/pulsar_env.sh;
           OPTS="${OPTS} -Dlog4j2.formatMsgNoLookups=true" exec bin/pulsar broker;
         ports:
-        # prometheus needs to access /metrics endpoint
+        # prometheus needs to access/metrics endpoint
         - name: http
           containerPort: {{ .Values.broker.ports.http }}
-        {{- if or (not .Values.tls.enabled) (not .Values.tls.broker.enabled) }}
         - name: "{{ .Values.tcpPrefix }}pulsar"
           containerPort: {{ .Values.broker.ports.pulsar }}
-        {{- end }}
         {{- if and .Values.tls.enabled .Values.tls.broker.enabled }}
         - name: https
           containerPort: {{ .Values.broker.ports.https }}
