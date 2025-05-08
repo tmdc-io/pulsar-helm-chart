@@ -60,7 +60,7 @@ data:
       - latencyBudgetMs: {{ .Values.pulsar_heartbeat.config.latencyTest.budgetMs | default 60 }}
         name: "pubsub-latency-incluster-{{ template "pulsar.fullname" . }}"
         intervalSeconds: {{ .Values.pulsar_heartbeat.config.latencyTest.intervalSeconds | default 60 }}
-        pulsarUrl: "pulsar://{{ template "pulsar.fullname" . }}-{{ .Values.broker.component }}:6651"
+        pulsarUrl: "pulsar://{{ template "pulsar.fullname" . }}-{{ .Values.broker.component }}:6650"
         topicName: {{ .Values.pulsar_heartbeat.config.latencyTest.intervalSeconds | default "persistent://public/default/pubsub-latency-test" }}
         payloadSizes: [15B]
         numberOfMessages: 1
