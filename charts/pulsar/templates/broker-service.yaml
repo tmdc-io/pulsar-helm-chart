@@ -30,13 +30,11 @@ metadata:
 {{ toYaml .Values.broker.service.annotations | indent 4 }}
 spec:
   ports:
-  # prometheus needs to access /metrics endpoint
+  # prometheus needs to access/metrics endpoint
   - name: http
     port: {{ .Values.broker.ports.http }}
-  {{- if or (not .Values.tls.enabled) (not .Values.tls.broker.enabled) }}
   - name: "{{ .Values.tcpPrefix }}pulsar"
     port: {{ .Values.broker.ports.pulsar }}
-  {{- end }}
   {{- if and .Values.tls.enabled .Values.tls.broker.enabled }}
   - name: https
     port: {{ .Values.broker.ports.https }}
