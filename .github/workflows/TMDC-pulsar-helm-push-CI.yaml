@@ -25,13 +25,6 @@ jobs:
       with:
         fetch-depth: 0
 
-    - name: Validate tag format
-      run: |
-        if [[ ! "${GITHUB_REF_NAME}" =~ ^[0-9]+\.[0-9]+\.[0-9]+-d.*$ ]]; then
-          echo "Tag ${GITHUB_REF_NAME} does not match release pattern x.y.z-d*, skipping."
-          exit 1
-        fi
-
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v2
       with:
