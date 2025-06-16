@@ -62,6 +62,14 @@ spec:
       {{- end}}
     {{- end }}
     {{- if and .Values.tls.enabled .Values.tls.proxy.enabled }}
+    - name: http
+      port: {{ .Values.proxy.ports.http }}
+      protocol: TCP
+      targetPort: sts-http
+    - name: "{{ .Values.tcpPrefix }}pulsar"
+      port: {{ .Values.proxy.ports.pulsar }}
+      protocol: TCP
+      targetPort: "sts-{{ .Values.tcpPrefix }}pulsar"
     - name: https
       port: {{ .Values.proxy.ports.https }}
       protocol: TCP

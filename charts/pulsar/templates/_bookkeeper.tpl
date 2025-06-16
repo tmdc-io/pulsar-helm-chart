@@ -91,8 +91,8 @@ https://bookkeeper.apache.org/bps/BP-29-metadata-store-api-module/
 https://bookkeeper.apache.org/docs/deployment/manual#cluster-metadata-setup
 */}}
 # Set empty values for zkServers and zkLedgersRootPath since we're using the metadataServiceUri to configure BookKeeper's metadata store
-zkServers: ""
-zkLedgersRootPath: ""
+zkServers: "{{.Values.pulsar_metadata.userProvidedZookeepers}}"
+zkLedgersRootPath: "/ledgers"
 {{- if .Values.components.zookeeper }}
 {{- if (and (hasKey .Values.pulsar_metadata "bookkeeper") .Values.pulsar_metadata.bookkeeper.usePulsarMetadataBookieDriver) }}
 # there's a bug when using PulsarMetadataBookieDriver since it always appends /ledgers to the metadataServiceUri

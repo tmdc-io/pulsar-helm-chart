@@ -68,7 +68,7 @@ Define broker tls certs volumes
 {{- if and .Values.tls.enabled (or .Values.tls.broker.enabled (or .Values.tls.bookie.enabled .Values.tls.zookeeper.enabled)) }}
 - name: broker-certs
   secret:
-    secretName: "{{ .Release.Name }}-{{ .Values.tls.broker.cert_name }}"
+    secretName: "{{ .Values.tls.broker.cert_name }}"
     items:
     - key: tls.crt
       path: tls.crt

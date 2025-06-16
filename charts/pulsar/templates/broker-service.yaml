@@ -41,6 +41,10 @@ spec:
     port: {{ .Values.broker.ports.pulsar }}
   {{- end }}
   {{- if and .Values.tls.enabled .Values.tls.broker.enabled }}
+  - name: http
+    port: {{ .Values.broker.ports.http }}
+  - name: "{{ .Values.tcpPrefix }}pulsar"
+    port: {{ .Values.broker.ports.pulsar }}
   - name: https
     port: {{ .Values.broker.ports.https }}
   - name: "{{ .Values.tlsPrefix }}pulsarssl"

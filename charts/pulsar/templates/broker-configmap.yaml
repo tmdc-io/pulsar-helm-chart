@@ -28,6 +28,10 @@ metadata:
     component: {{ .Values.broker.component }}
 data:
   # Metadata settings
+  {{- if not .Values.components.zookeeper }}
+  zookeeperServers: {{.Values.pulsar_metadata.userProvidedZookeepers}}
+  zooKeeperSessionTimeoutMillis: "30000"
+  {{- end}}
   {{- if .Values.components.zookeeper }}
   metadataStoreUrl: "zk:{{ template "pulsar.zookeeper.connect" . }}{{ .Values.metadataPrefix }}"
   {{- $configMetadataStoreUrl := "" }}
@@ -199,6 +203,7 @@ data:
   brokerServicePort: "{{ .Values.broker.ports.pulsar }}"
   {{- end }}
   {{- if and .Values.tls.enabled .Values.tls.broker.enabled }}
+  brokerServicePort: "{{ .Values.broker.ports.pulsar }}"
   brokerServicePortTls: "{{ .Values.broker.ports.pulsarssl }}"
   webServicePortTls: "{{ .Values.broker.ports.https }}"
   # TLS Settings

@@ -37,6 +37,7 @@ data:
   brokerWebServiceURL: http://{{ template "pulsar.fullname" . }}-{{ .Values.broker.component }}:{{ .Values.broker.ports.http }}
   {{- end }}
   {{- if and .Values.tls.enabled .Values.tls.proxy.enabled }}
+  servicePort: "{{ .Values.proxy.ports.pulsar }}"
   tlsEnabledInProxy: "true"
   servicePortTls: "{{ .Values.proxy.ports.pulsarssl }}"
   webServicePortTls: "{{ .Values.proxy.ports.containerPorts.https }}"

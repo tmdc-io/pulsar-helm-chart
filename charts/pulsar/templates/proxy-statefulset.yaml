@@ -226,6 +226,10 @@ spec:
           containerPort: {{ .Values.proxy.ports.pulsar }}
         {{- end }}
         {{- if and (.Values.tls.enabled) (.Values.tls.proxy.enabled) }}
+        - name: sts-http
+          containerPort: {{ .Values.proxy.ports.containerPorts.http }}
+        - name: "sts-{{ .Values.tcpPrefix }}pulsar"
+          containerPort: {{ .Values.proxy.ports.pulsar }}
         - name: sts-https
           containerPort: {{ .Values.proxy.ports.containerPorts.https }}
         - name: "sts-{{ .Values.tlsPrefix }}pulsarssl"
@@ -305,7 +309,7 @@ spec:
                 path: ca.crt
         - name: proxy-certs
           secret:
-            secretName: "{{ .Release.Name }}-{{ .Values.tls.proxy.cert_name }}"
+            secretName: "{{ .Values.tls.proxy.cert_name }}"
             items:
               - key: tls.crt
                 path: tls.crt
