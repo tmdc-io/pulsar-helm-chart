@@ -226,8 +226,6 @@ spec:
           containerPort: {{ .Values.proxy.ports.pulsar }}
         {{- end }}
         {{- if and (.Values.tls.enabled) (.Values.tls.proxy.enabled) }}
-        - name: sts-http
-          containerPort: {{ .Values.proxy.ports.containerPorts.http }}
         - name: "sts-{{ .Values.tcpPrefix }}pulsar"
           containerPort: {{ .Values.proxy.ports.pulsar }}
         - name: sts-https
